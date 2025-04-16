@@ -2,12 +2,11 @@
   publish = "/"
   command = ""
 
+# Only redirect 404 errors to index.html, not all paths
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Role = ["admin"]}
+  status = 404
 
 [dev]
   framework = "#static"
