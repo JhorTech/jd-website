@@ -6,16 +6,16 @@
     <meta name="description" content="Contact JD IT & ENTERTAINMENT for AI consulting services. Our team of AI experts is ready to help you transform your business with artificial intelligence solutions.">
     <meta name="keywords" content="AI consulting contact, artificial intelligence services, contact AI experts, AI solutions">
     <title>Contact Us | JD IT & ENTERTAINMENT</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/multi-page.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="multi-page.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Canonical link -->
-    <link rel="canonical" href="https://jditandevents.com/pages/contact.html">
+    <link rel="canonical" href="https://jditandevents.com/contact.html">
 </head>
 <body>
     <!-- Header -->
-    <include src="/pages/header.html"></include>
+    <include src="header.html"></include>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -213,11 +213,57 @@
     </section>
 
     <!-- Footer -->
-    <include src="/pages/footer.html"></include>
+    <include src="footer.html"></include>
 
     <!-- JavaScript -->
-    <script src="/js/include-html.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="include-html.js"></script>
+    <script src="main.js"></script>
+    
+    <!-- Fix for component inclusion -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fix component inclusion
+        const includes = document.getElementsByTagName('include');
+        const includeHTML = function(callback) {
+            let counter = includes.length;
+            
+            const processInclude = function(include) {
+                const src = include.getAttribute('src');
+                if (!src) {
+                    counter--;
+                    if (counter === 0 && callback) callback();
+                    return;
+                }
+                
+                fetch(src)
+                    .then(response => {
+                        if (response.ok) return response.text();
+                        throw new Error(`Failed to load ${src}: ${response.status} ${response.statusText}`);
+                    })
+                    .then(html => {
+                        const template = document.createElement('template');
+                        template.innerHTML = html;
+                        include.parentNode.replaceChild(template.content, include);
+                        counter--;
+                        if (counter === 0 && callback) callback();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        include.innerHTML = `<p>Error loading component: ${error.message}</p>`;
+                        counter--;
+                        if (counter === 0 && callback) callback();
+                    });
+            };
+            
+            if (includes.length === 0 && callback) callback();
+            
+            Array.from(includes).forEach(processInclude);
+        };
+        
+        includeHTML();
+    });
+    </script>
+    
     <script>
         // FAQ accordion functionality
         document.addEventListener('DOMContentLoaded', function() {

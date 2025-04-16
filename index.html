@@ -6,16 +6,60 @@
     <meta name="description" content="JD IT & ENTERTAINMENT provides cutting-edge AI consulting services to help businesses transform operations, enhance decision-making, and drive innovation through artificial intelligence solutions.">
     <meta name="keywords" content="AI consulting, artificial intelligence, machine learning, data analytics, business transformation, AI solutions, AI strategy">
     <title>JD IT & ENTERTAINMENT - Artificial Intelligence Consulting Services</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/multi-page.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="multi-page.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Canonical link -->
     <link rel="canonical" href="https://jditandevents.com/">
+    <!-- Fix for component inclusion -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fix component inclusion
+        const includes = document.getElementsByTagName('include');
+        const includeHTML = function(callback) {
+            let counter = includes.length;
+            
+            const processInclude = function(include) {
+                const src = include.getAttribute('src');
+                if (!src) {
+                    counter--;
+                    if (counter === 0 && callback) callback();
+                    return;
+                }
+                
+                fetch(src)
+                    .then(response => {
+                        if (response.ok) return response.text();
+                        throw new Error(`Failed to load ${src}: ${response.status} ${response.statusText}`);
+                    })
+                    .then(html => {
+                        const template = document.createElement('template');
+                        template.innerHTML = html;
+                        include.parentNode.replaceChild(template.content, include);
+                        counter--;
+                        if (counter === 0 && callback) callback();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        include.innerHTML = `<p>Error loading component: ${error.message}</p>`;
+                        counter--;
+                        if (counter === 0 && callback) callback();
+                    });
+            };
+            
+            if (includes.length === 0 && callback) callback();
+            
+            Array.from(includes).forEach(processInclude);
+        };
+        
+        includeHTML();
+    });
+    </script>
 </head>
 <body>
     <!-- Header -->
-    <include src="/pages/header.html"></include>
+    <include src="header.html"></include>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -23,8 +67,8 @@
             <h1 class="hero-title animate">Artificial Intelligence <span>Consulting Services</span></h1>
             <p class="hero-subtitle animate delay-1">We help businesses leverage the power of AI to transform operations, enhance decision-making, and drive innovation through cutting-edge artificial intelligence solutions.</p>
             <div class="hero-buttons animate delay-2">
-                <a href="/pages/technologies.html" class="btn">Explore AI Technologies</a>
-                <a href="/pages/contact.html" class="btn btn-outline">Get Started</a>
+                <a href="technologies.html" class="btn">Explore AI Technologies</a>
+                <a href="contact.html" class="btn btn-outline">Get Started</a>
             </div>
         </div>
     </section>
@@ -42,7 +86,7 @@
                     </div>
                     <h3 class="capability-title">Machine Learning</h3>
                     <p class="capability-description">Our machine learning solutions enable systems to learn from data, identify patterns, and make decisions with minimal human intervention, driving efficiency and accuracy.</p>
-                    <a href="/pages/technologies.html#machine-learning" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="technologies.html#machine-learning" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="capability-card">
@@ -51,7 +95,7 @@
                     </div>
                     <h3 class="capability-title">Natural Language Processing</h3>
                     <p class="capability-description">We implement NLP solutions that enable computers to understand, interpret, and generate human language, powering chatbots, sentiment analysis, and content generation.</p>
-                    <a href="/pages/technologies.html#nlp" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="technologies.html#nlp" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="capability-card">
@@ -60,7 +104,7 @@
                     </div>
                     <h3 class="capability-title">Computer Vision</h3>
                     <p class="capability-description">Our computer vision systems analyze and interpret visual data from the world, enabling applications like image recognition, object detection, and automated quality control.</p>
-                    <a href="/pages/technologies.html#computer-vision" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="technologies.html#computer-vision" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="capability-card">
@@ -69,7 +113,7 @@
                     </div>
                     <h3 class="capability-title">Generative AI</h3>
                     <p class="capability-description">We harness the power of generative AI to create new content, designs, and solutions that enhance creativity and productivity across various business functions.</p>
-                    <a href="/pages/technologies.html#generative-ai" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="technologies.html#generative-ai" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -88,7 +132,7 @@
                     </div>
                     <h3 class="service-title">Business Analysis</h3>
                     <p class="service-description">Our AI consultants analyze your infrastructure, data, and relevant industry trends to identify opportunities for transformative AI solutions that meet your unique needs.</p>
-                    <a href="/pages/services/business-analysis.html" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#business-analysis" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -97,7 +141,7 @@
                     </div>
                     <h3 class="service-title">AI Strategy Development</h3>
                     <p class="service-description">We assess your business environment and data to identify areas where AI can drive transformation, ensuring tailored solutions that satisfy your specific requirements.</p>
-                    <a href="/pages/services/ai-strategy.html" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#ai-strategy" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -106,12 +150,12 @@
                     </div>
                     <h3 class="service-title">Data Qualification & Preparation</h3>
                     <p class="service-description">We perform comprehensive audits to ensure data quality at every stage, including thorough data collection and validation to fuel AI solutions for optimal performance.</p>
-                    <a href="/pages/services/data-qualification.html" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#data-qualification" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             
             <div class="services-cta">
-                <a href="/pages/services.html" class="btn">View All Services</a>
+                <a href="services.html" class="btn">View All Services</a>
             </div>
         </div>
     </section>
@@ -128,7 +172,7 @@
                     <div class="case-study-content">
                         <h3 class="case-study-title">Healthcare Predictive Analytics</h3>
                         <p class="case-study-description">Implemented an AI-driven predictive analytics system for a major healthcare provider, resulting in a 35% improvement in patient outcome predictions.</p>
-                        <a href="/pages/case-studies/healthcare-predictive-analytics.html" class="case-study-link">Read More</a>
+                        <a href="case-studies.html#healthcare" class="case-study-link">Read More</a>
                     </div>
                 </div>
                 
@@ -137,7 +181,7 @@
                     <div class="case-study-content">
                         <h3 class="case-study-title">Retail Inventory Optimization</h3>
                         <p class="case-study-description">Developed an AI solution for inventory management that reduced stockouts by 42% and decreased excess inventory costs by 28% for a national retail chain.</p>
-                        <a href="/pages/case-studies/retail-inventory-optimization.html" class="case-study-link">Read More</a>
+                        <a href="case-studies.html#retail" class="case-study-link">Read More</a>
                     </div>
                 </div>
                 
@@ -146,13 +190,13 @@
                     <div class="case-study-content">
                         <h3 class="case-study-title">Financial Fraud Detection</h3>
                         <p class="case-study-description">Implemented an advanced AI fraud detection system for a financial institution that increased fraud detection by 67% while reducing false positives by 53%.</p>
-                        <a href="/pages/case-studies/financial-fraud-detection.html" class="case-study-link">Read More</a>
+                        <a href="case-studies.html#finance" class="case-study-link">Read More</a>
                     </div>
                 </div>
             </div>
             
             <div class="case-studies-cta">
-                <a href="/pages/case-studies.html" class="btn">View All Case Studies</a>
+                <a href="case-studies.html" class="btn">View All Case Studies</a>
             </div>
         </div>
     </section>
@@ -162,7 +206,7 @@
         <div class="container">
             <h2 class="cta-title">Ready to Transform Your Business with AI?</h2>
             <p class="cta-subtitle">Let's discuss how our AI consulting services can help you achieve your business goals and stay ahead of the competition.</p>
-            <a href="/pages/contact.html" class="btn">Contact Us Today</a>
+            <a href="contact.html" class="btn">Contact Us Today</a>
         </div>
     </section>
 
@@ -184,7 +228,7 @@
                                 <img src="images/team/author1.jpg" alt="Author" class="blog-author-img">
                                 <span class="blog-author-name">Sarah Chen</span>
                             </div>
-                            <a href="/pages/blog/generative-ai-trends.html" class="blog-link">Read More</a>
+                            <a href="blog.html#generative-ai-trends" class="blog-link">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -200,7 +244,7 @@
                                 <img src="images/team/author2.jpg" alt="Author" class="blog-author-img">
                                 <span class="blog-author-name">Michael Rodriguez</span>
                             </div>
-                            <a href="/pages/blog/ai-implementation-guide.html" class="blog-link">Read More</a>
+                            <a href="blog.html#ai-implementation" class="blog-link">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -216,23 +260,22 @@
                                 <img src="images/team/author3.jpg" alt="Author" class="blog-author-img">
                                 <span class="blog-author-name">Aisha Johnson</span>
                             </div>
-                            <a href="/pages/blog/ethical-ai-framework.html" class="blog-link">Read More</a>
+                            <a href="blog.html#ethical-ai" class="blog-link">Read More</a>
                         </div>
                     </div>
                 </div>
             </div>
             
             <div class="insights-cta">
-                <a href="/pages/blog.html" class="btn">View All Insights</a>
+                <a href="blog.html" class="btn">View All Insights</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <include src="/pages/footer.html"></include>
+    <include src="footer.html"></include>
 
     <!-- JavaScript -->
-    <script src="js/include-html.js"></script>
-    <script src="js/main.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>

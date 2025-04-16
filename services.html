@@ -6,16 +6,16 @@
     <meta name="description" content="Explore our comprehensive AI consulting services including business analysis, AI strategy development, data qualification, AI product solutions, integration, and support.">
     <meta name="keywords" content="AI consulting services, business analysis, AI strategy, data qualification, AI product solutions, AI integration, AI support">
     <title>AI Consulting Services | JD IT & ENTERTAINMENT</title>
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/multi-page.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="multi-page.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <!-- Canonical link -->
-    <link rel="canonical" href="https://jditandevents.com/pages/services.html">
+    <link rel="canonical" href="https://jditandevents.com/services.html">
 </head>
 <body>
     <!-- Header -->
-    <include src="/pages/header.html"></include>
+    <include src="header.html"></include>
 
     <!-- Page Header -->
     <section class="page-header">
@@ -52,7 +52,7 @@
                     </div>
                     <h3 class="service-title">Business Analysis</h3>
                     <p class="service-description">Our AI consultants analyze your infrastructure, data, and relevant industry trends to identify opportunities for transformative AI solutions that meet your unique needs. We conduct thorough assessments of your current systems, processes, and pain points to determine where AI can deliver the most value.</p>
-                    <a href="/pages/services/business-analysis.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#business-analysis" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -61,7 +61,7 @@
                     </div>
                     <h3 class="service-title">AI Strategy Development</h3>
                     <p class="service-description">We assess your business environment and data to identify areas where AI can drive transformation, ensuring tailored solutions that satisfy your specific requirements. Our strategic approach aligns AI initiatives with your business goals, creating a roadmap for successful implementation and measurable results.</p>
-                    <a href="/pages/services/ai-strategy.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#ai-strategy" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -70,7 +70,7 @@
                     </div>
                     <h3 class="service-title">Data Qualification & Preparation</h3>
                     <p class="service-description">We perform comprehensive audits to ensure data quality at every stage, including thorough data collection and validation to fuel AI solutions for optimal performance. Our data scientists help you organize, clean, and structure your data to create a solid foundation for successful AI implementation.</p>
-                    <a href="/pages/services/data-qualification.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#data-qualification" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -79,7 +79,7 @@
                     </div>
                     <h3 class="service-title">AI Product Solutions</h3>
                     <p class="service-description">Our AI consultancy experts deliver solutions that fully meet our customers' expectations, turning your vision into reality with excellence – from prototypes to implementation. We develop custom AI applications tailored to your specific business challenges, using the most appropriate technologies and frameworks.</p>
-                    <a href="/pages/services/ai-solutions.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#ai-solutions" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -88,7 +88,7 @@
                     </div>
                     <h3 class="service-title">Integration & Deployment</h3>
                     <p class="service-description">We specialize in seamlessly deploying AI solutions tailored to your business needs, handling every step from analysis to customization and support to ensure ultimate efficiency. Our integration experts ensure your AI solutions work harmoniously with your existing systems and workflows.</p>
-                    <a href="/pages/services/integration.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#integration" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -97,7 +97,7 @@
                     </div>
                     <h3 class="service-title">Maintenance & Support</h3>
                     <p class="service-description">Our dedicated team ensures that your AI solutions remain up-to-date and adaptable to changing requirements, providing you with confidence in their long-term effectiveness. We offer ongoing monitoring, optimization, and support to maximize the value of your AI investments over time.</p>
-                    <a href="/pages/services/maintenance.html" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                    <a href="services.html#maintenance" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
         </div>
@@ -232,15 +232,60 @@
         <div class="container">
             <h2 class="cta-title">Ready to Transform Your Business with AI?</h2>
             <p class="cta-subtitle">Let's discuss how our AI consulting services can help you achieve your business goals and stay ahead of the competition.</p>
-            <a href="/pages/contact.html" class="btn">Contact Us Today</a>
+            <a href="contact.html" class="btn">Contact Us Today</a>
         </div>
     </section>
 
     <!-- Footer -->
-    <include src="/pages/footer.html"></include>
+    <include src="footer.html"></include>
 
     <!-- JavaScript -->
-    <script src="/js/include-html.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="include-html.js"></script>
+    <script src="main.js"></script>
+    
+    <!-- Fix for component inclusion -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Fix component inclusion
+        const includes = document.getElementsByTagName('include');
+        const includeHTML = function(callback) {
+            let counter = includes.length;
+            
+            const processInclude = function(include) {
+                const src = include.getAttribute('src');
+                if (!src) {
+                    counter--;
+                    if (counter === 0 && callback) callback();
+                    return;
+                }
+                
+                fetch(src)
+                    .then(response => {
+                        if (response.ok) return response.text();
+                        throw new Error(`Failed to load ${src}: ${response.status} ${response.statusText}`);
+                    })
+                    .then(html => {
+                        const template = document.createElement('template');
+                        template.innerHTML = html;
+                        include.parentNode.replaceChild(template.content, include);
+                        counter--;
+                        if (counter === 0 && callback) callback();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        include.innerHTML = `<p>Error loading component: ${error.message}</p>`;
+                        counter--;
+                        if (counter === 0 && callback) callback();
+                    });
+            };
+            
+            if (includes.length === 0 && callback) callback();
+            
+            Array.from(includes).forEach(processInclude);
+        };
+        
+        includeHTML();
+    });
+    </script>
 </body>
 </html>
