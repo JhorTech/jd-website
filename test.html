@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Test Page</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/multi-page.css">
+    <link rel="stylesheet" href="/css/optimizations.css">
+    <style>
+        .test-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .test-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .test-title {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .test-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #ffc107;
+            color: #333;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .test-button:hover {
+            background-color: #e0a800;
+        }
+        .test-results {
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #fff;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        .test-log {
+            height: 200px;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            font-family: monospace;
+            border-radius: 4px;
+        }
+        .success {
+            color: #28a745;
+        }
+        .warning {
+            color: #ffc107;
+        }
+        .error {
+            color: #dc3545;
+        }
+        .viewport-size {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.7);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 9999;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Website Testing Dashboard</h1>
+        <p>Use this page to test the functionality and responsiveness of the website.</p>
+        
+        <div class="test-section">
+            <h2 class="test-title">Navigation Testing</h2>
+            <button class="test-button" id="test-navigation">Test All Navigation Links</button>
+            <div class="test-results" id="navigation-results">
+                <div class="test-log" id="navigation-log"></div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">Form Validation Testing</h2>
+            <button class="test-button" id="test-forms">Test Form Validation</button>
+            <div class="test-results" id="form-results">
+                <div class="test-log" id="form-log"></div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">Responsive Design Testing</h2>
+            <button class="test-button" id="test-mobile">Test Mobile View (375px)</button>
+            <button class="test-button" id="test-tablet">Test Tablet View (768px)</button>
+            <button class="test-button" id="test-desktop">Test Desktop View (1200px)</button>
+            <button class="test-button" id="test-responsive">Test Responsive Breakpoints</button>
+            <div class="test-results" id="responsive-results">
+                <div class="test-log" id="responsive-log"></div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">Image Loading Testing</h2>
+            <button class="test-button" id="test-images">Test Image Loading</button>
+            <div class="test-results" id="image-results">
+                <div class="test-log" id="image-log"></div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">Component Inclusion Testing</h2>
+            <button class="test-button" id="test-components">Test Component Inclusion</button>
+            <div class="test-results" id="component-results">
+                <div class="test-log" id="component-log"></div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2 class="test-title">Performance Testing</h2>
+            <button class="test-button" id="test-performance">Test Page Performance</button>
+            <div class="test-results" id="performance-results">
+                <div class="test-log" id="performance-log"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="viewport-size" id="viewport-size"></div>
+    
+    <script src="/js/test-functionality.js"></script>
+    <script>
+        // Display viewport size
+        function updateViewportSize() {
+            const vpSize = document.getElementById('viewport-size');
+            vpSize.textContent = `Viewport: ${window.innerWidth}px × ${window.innerHeight}px`;
+        }
+        
+        window.addEventListener('resize', updateViewportSize);
+        updateViewportSize();
+        
+        // Test button functionality
+        document.getElementById('test-navigation').addEventListener('click', function() {
+            const log = document.getElementById('navigation-log');
+            log.innerHTML = 'Testing navigation links...<br>';
+            
+            // Get all navigation links
+            const navLinks = document.querySelectorAll('a[href]');
+            let brokenLinks = 0;
+            let testedLinks = 0;
+            
+            navLinks.forEach(link => {
+                const href = link.getAttribute('href');
+                if (href && !href.startsWith('#') && !href.startsWith('javascript:')) {
+                    testedLinks++;
+                    const url = href.startsWith('http') ? href : window.location.origin + (href.startsWith('/') ? href : '/' + href);
+                    
+                    fetch(url, { method: 'HEAD' })
+                        .then(response => {
+                            if (!response.ok) {
+                                log.innerHTML += `<span class="error">Broken link: ${href} (${response.status})</span><br>`;
+                                brokenLinks++;
+                            } else {
+                                log.innerHTML += `<span class="success">Valid link: ${href}</span><br>`;
+                            }
+                        })
+                        .catch(error => {
+                            log.innerHTML += `<span class="error">Error fetching ${href}: ${error}</span><br>`;
+                            brokenLinks++;
+                        })
+                        .finally(() => {
+                            if (--testedLinks === 0) {
+                                log.innerHTML += `<br><strong>Navigation test complete. Found ${brokenLinks} broken links.</strong>`;
+                            }
+                        });
+                }
+            });
+        });
+        
+        document.getElementById('test-forms').addEventListener('click', function() {
+            const log = document.getElementById('form-log');
+            log.innerHTML = 'Testing form validation...<br>';
+            
+            // Get all forms
+            const forms = document.querySelectorAll('form');
+            
+            if (forms.length === 0) {
+                log.innerHTML += '<span class="warning">No forms found on this page. Navigate to a page with forms to test.</span><br>';
+                return;
+            }
+            
+            forms.forEach(form => {
+                const formName = form.getAttribute('name') || 'unnamed form';
+                log.innerHTML += `<br>Testing form: ${formName}<br>`;
+                
+                const requiredFields = form.querySelectorAll('[required]');
+                const submitButton = form.querySelector('button[type="submit"]');
+                
+                if (requiredFields.length > 0 && submitButton) {
+                    log.innerHTML += `<span class="success">Form has ${requiredFields.length} required fields and a submit button.</span><br>`;
+                    
+                    // Test required fields
+                    requiredFields.forEach(field => {
+                        log.innerHTML += `Required field: ${field.name || 'unnamed field'} (${field.tagName.toLowerCase()})<br>`;
+                    });
+                } else {
+                    if (requiredFields.length === 0) {
+                        log.innerHTML += '<span class="warning">Form has no required fields.</span><br>';
+                    }
+                    if (!submitButton) {
+                        log.innerHTML += '<span class="error">Form has no submit button.</span><br>';
+                    }
+                }
+            });
+            
+            log.innerHTML += '<br><strong>Form validation test complete.</strong>';
+        });
+        
+        document.getElementById('test-mobile').addEventListener('click', function() {
+            window.resizeTo(375, window.innerHeight);
+            updateViewportSize();
+        });
+        
+        document.getElementById('test-tablet').addEventListener('click', function() {
+            window.resizeTo(768, window.innerHeight);
+            updateViewportSize();
+        });
+        
+        document.getElementById('test-desktop').addEventListener('click', function() {
+            window.resizeTo(1200, window.innerHeight);
+            updateViewportSize();
+        });
+        
+        document.getElementById('test-responsive').addEventListener('click', function() {
+            const log = document.getElementById('responsive-log');
+            log.innerHTML = 'Testing responsive design...<br>';
+            
+            // Check for mobile menu
+            const mobileMenu = document.querySelector('.mobile-menu-btn');
+            if (mobileMenu) {
+                log.innerHTML += '<span class="success">Mobile menu found.</span><br>';
+            } else {
+                log.innerHTML += '<span class="warning">Mobile menu not found! Navigate to a page with navigation to test.</span><br>';
+            }
+            
+            // Check for horizontal overflow
+            const bodyWidth = document.body.scrollWidth;
+            const windowWidth = window.innerWidth;
+            if (bodyWidth > windowWidth) {
+                log.innerHTML += `<span class="error">Horizontal overflow detected: body width (${bodyWidth}px) > window width (${windowWidth}px)</span><br>`;
+            } else {
+                log.innerHTML += '<span class="success">No horizontal overflow detected.</span><br>';
+            }
+            
+            log.innerHTML += '<br><strong>Responsive design test complete.</strong>';
+        });
+        
+        document.getElementById('test-images').addEventListener('click', function() {
+            const log = document.getElementById('image-log');
+            log.innerHTML = 'Testing image loading...<br>';
+            
+            // Get all images
+            const images = document.querySelectorAll('img');
+            
+            if (images.length === 0) {
+                log.innerHTML += '<span class="warning">No images found on this page. Navigate to a page with images to test.</span><br>';
+                return;
+            }
+            
+            let loadedImages = 0;
+            let brokenImages = 0;
+            let pendingImages = images.length;
+            
+            images.forEach(img => {
+                const imgSrc = img.src || 'no src';
+                
+                if (img.complete) {
+                    if (img.naturalWidth === 0) {
+                        log.innerHTML += `<span class="error">Broken image: ${imgSrc}</span><br>`;
+                        brokenImages++;
+                    } else {
+                        log.innerHTML += `<span class="success">Loaded image: ${imgSrc}</span><br>`;
+                        loadedImages++;
+                    }
+                    pendingImages--;
+                } else {
+                    const originalOnload = img.onload;
+                    const originalOnerror = img.onerror;
+                    
+                    img.onload = function() {
+                        if (originalOnload) originalOnload.call(img);
+                        log.innerHTML += `<span class="success">Loaded image: ${imgSrc}</span><br>`;
+                        loadedImages++;
+                        pendingImages--;
+                        checkComplete();
+                    };
+                    
+                    img.onerror = function() {
+                        if (originalOnerror) originalOnerror.call(img);
+                        log.innerHTML += `<span class="error">Failed to load image: ${imgSrc}</span><br>`;
+                        brokenImages++;
+                        pendingImages--;
+                        checkComplete();
+                    };
+                }
+            });
+            
+            function checkComplete() {
+                if (pendingImages === 0) {
+                    log.innerHTML += `<br><strong>Image test complete. Loaded: ${loadedImages}, Broken: ${brokenImages}, Total: ${images.length}</strong>`;
+                }
+            }
+            
+            // If all images were already loaded/broken
+            if (pendingImages === 0) {
+                checkComplete();
+            }
+        });
+        
+        document.getElementById('test-components').addEventListener('click', function() {
+            const log = document.getElementById('component-log');
+            log.innerHTML = 'Testing component inclusion...<br>';
+            
+            // Check for header and footer
+            const header = document.querySelector('header');
+            const footer = document.querySelector('footer');
+            
+            if (header) {
+                log.innerHTML += '<span class="success">Header component found.</span><br>';
+            } else {
+                log.innerHTML += '<span class="error">Header component not found!</span><br>';
+            }
+            
+            if (footer) {
+                log.innerHTML += '<span class="success">Footer component found.</span><br>';
+            } else {
+                log.innerHTML += '<span class="error">Footer component not found!</span><br>';
+            }
+            
+            // Check for include tags
+            const includeTags = document.querySelectorAll('include');
+            if (includeTags.length > 0) {
+                log.innerHTML += `<span class="warning">Found ${includeTags.length} unprocessed include tags. Component inclusion may not be working correctly.</span><br>`;
+            } else {
+                log.innerHTML += '<span class="success">No unprocessed include tags found.</span><br>';
+            }
+            
+            log.innerHTML += '<br><strong>Component inclusion test complete.</strong>';
+        });
+        
+        document.getElementById('test-performance').addEventListener('click', function() {
+            const log = document.getElementById('performance-log');
+            log.innerHTML = 'Testing page performance...<br>';
+            
+            // Get performance metrics
+            if ('performance' in window) {
+                const navStart = performance.timing.navigationStart;
+                const loadTime = performance.timing.loadEventEnd - navStart;
+                const domReady = performance.timing.domContentLoadedEventEnd - navStart;
+                
+                log.innerHTML += `<span class="success">Page load time: ${loadTime}ms</span><br>`;
+                log.innerHTML += `<span class="success">DOM ready time: ${domReady}ms</span><br>`;
+                
+                // Check for paint metrics
+                const paintMetrics = performance.getEntriesByType('paint');
+                if (paintMetrics.length > 0) 
+(Content truncated due to size limit. Use line ranges to read in chunks)

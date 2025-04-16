@@ -3,38 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="JD IT & ENTERTAINMENT provides cutting-edge AI consulting services to help businesses transform operations, enhance decision-making, and drive innovation through artificial intelligence solutions.">
+    <meta name="keywords" content="AI consulting, artificial intelligence, machine learning, data analytics, business transformation, AI solutions, AI strategy">
     <title>JD IT & ENTERTAINMENT - Artificial Intelligence Consulting Services</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/multi-page.css">
     <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Canonical link -->
+    <link rel="canonical" href="https://jditandevents.com/">
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="container header-container">
-            <a href="#" class="logo">JD<span>IT</span></a>
-            <nav>
-                <ul class="nav-menu">
-                    <li class="nav-item"><a href="#services">Services</a></li>
-                    <li class="nav-item"><a href="#benefits">Benefits</a></li>
-                    <li class="nav-item"><a href="#case-studies">Case Studies</a></li>
-                    <li class="nav-item"><a href="#contact">Contact</a></li>
-                </ul>
-                <div class="mobile-menu-btn">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </nav>
-        </div>
-    </header>
+    <include src="/pages/header.html"></include>
 
     <!-- Hero Section -->
     <section class="hero">
         <div class="container">
             <h1 class="hero-title animate">Artificial Intelligence <span>Consulting Services</span></h1>
-            <p class="hero-subtitle animate delay-1">We help businesses leverage the power of AI to transform operations, enhance decision-making, and drive innovation.</p>
-            <a href="#contact" class="btn animate delay-2">Get Started</a>
+            <p class="hero-subtitle animate delay-1">We help businesses leverage the power of AI to transform operations, enhance decision-making, and drive innovation through cutting-edge artificial intelligence solutions.</p>
+            <div class="hero-buttons animate delay-2">
+                <a href="/pages/technologies.html" class="btn">Explore AI Technologies</a>
+                <a href="/pages/contact.html" class="btn btn-outline">Get Started</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Capabilities Section -->
+    <section id="capabilities" class="capabilities">
+        <div class="container">
+            <h2 class="section-title">Our AI Capabilities</h2>
+            <p class="section-subtitle">We specialize in implementing advanced AI technologies to solve complex business challenges and drive measurable results.</p>
+            
+            <div class="capabilities-grid">
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="capability-title">Machine Learning</h3>
+                    <p class="capability-description">Our machine learning solutions enable systems to learn from data, identify patterns, and make decisions with minimal human intervention, driving efficiency and accuracy.</p>
+                    <a href="/pages/technologies.html#machine-learning" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3 class="capability-title">Natural Language Processing</h3>
+                    <p class="capability-description">We implement NLP solutions that enable computers to understand, interpret, and generate human language, powering chatbots, sentiment analysis, and content generation.</p>
+                    <a href="/pages/technologies.html#nlp" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="capability-title">Computer Vision</h3>
+                    <p class="capability-description">Our computer vision systems analyze and interpret visual data from the world, enabling applications like image recognition, object detection, and automated quality control.</p>
+                    <a href="/pages/technologies.html#computer-vision" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+                
+                <div class="capability-card">
+                    <div class="capability-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <h3 class="capability-title">Generative AI</h3>
+                    <p class="capability-description">We harness the power of generative AI to create new content, designs, and solutions that enhance creativity and productivity across various business functions.</p>
+                    <a href="/pages/technologies.html#generative-ai" class="capability-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -51,6 +88,7 @@
                     </div>
                     <h3 class="service-title">Business Analysis</h3>
                     <p class="service-description">Our AI consultants analyze your infrastructure, data, and relevant industry trends to identify opportunities for transformative AI solutions that meet your unique needs.</p>
+                    <a href="/pages/services/business-analysis.html" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -59,6 +97,7 @@
                     </div>
                     <h3 class="service-title">AI Strategy Development</h3>
                     <p class="service-description">We assess your business environment and data to identify areas where AI can drive transformation, ensuring tailored solutions that satisfy your specific requirements.</p>
+                    <a href="/pages/services/ai-strategy.html" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
                 
                 <div class="service-card">
@@ -67,61 +106,12 @@
                     </div>
                     <h3 class="service-title">Data Qualification & Preparation</h3>
                     <p class="service-description">We perform comprehensive audits to ensure data quality at every stage, including thorough data collection and validation to fuel AI solutions for optimal performance.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 class="service-title">AI Product Solutions</h3>
-                    <p class="service-description">Our AI consultancy experts deliver solutions that fully meet our customers' expectations, turning your vision into reality with excellence – from prototypes to implementation.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-rocket"></i>
-                    </div>
-                    <h3 class="service-title">Integration & Deployment</h3>
-                    <p class="service-description">We specialize in seamlessly deploying AI solutions tailored to your business needs, handling every step from analysis to customization and support to ensure ultimate efficiency.</p>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <h3 class="service-title">Maintenance & Support</h3>
-                    <p class="service-description">Our dedicated team ensures that your AI solutions remain up-to-date and adaptable to changing requirements, providing you with confidence in their long-term effectiveness.</p>
+                    <a href="/pages/services/data-qualification.html" class="service-link">Read More <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Benefits Section -->
-    <section id="benefits" class="benefits">
-        <div class="container">
-            <h2 class="section-title">Benefits of Our AI Consulting</h2>
-            <p class="section-subtitle">We practice a comprehensive approach to Artificial Intelligence consulting, guaranteeing the success of your project.</p>
             
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Vast Experience & Expertise</h3>
-                    <p class="benefit-description">Our extensive expertise enables us to offer a wide range of AI consulting services tailored to diverse industries. With a deep understanding of domain-specific challenges and opportunities, we deliver customized solutions to drive innovation and growth.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Regulatory Compliance</h3>
-                    <p class="benefit-description">We rigorously adhere to international regulations like GDPR, HIPAA, and others when developing our Artificial Intelligence solutions. Our solutions comply with regulatory requirements while offering exceptional performance and supporting the highest level of privacy.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Responsible AI Development</h3>
-                    <p class="benefit-description">We create ethical and transparent AI solutions. Our focus on fairness, accountability, and privacy guarantees that the AI systems we build positively contribute to society without causing harm, ensuring that technology remains a force for good.</p>
-                </div>
-                
-                <div class="benefit-card">
-                    <h3 class="benefit-title">Data Integrity & Accessibility</h3>
-                    <p class="benefit-description">Our team will assess the quality and availability of your corporate data. If these datasets don't meet the standards required for your future AI solution, we will assist you in reorganizing and cleansing them to ensure reliability.</p>
-                </div>
+            <div class="services-cta">
+                <a href="/pages/services.html" class="btn">View All Services</a>
             </div>
         </div>
     </section>
@@ -134,31 +124,35 @@
             
             <div class="case-studies-grid">
                 <div class="case-study-card">
-                    <img src="images/case1.jpg" alt="Healthcare AI" class="case-study-img">
+                    <img src="images/case1.jpg" alt="Healthcare AI Predictive Analytics" class="case-study-img">
                     <div class="case-study-content">
                         <h3 class="case-study-title">Healthcare Predictive Analytics</h3>
                         <p class="case-study-description">Implemented an AI-driven predictive analytics system for a major healthcare provider, resulting in a 35% improvement in patient outcome predictions.</p>
-                        <a href="#" class="case-study-link">Read More</a>
+                        <a href="/pages/case-studies/healthcare-predictive-analytics.html" class="case-study-link">Read More</a>
                     </div>
                 </div>
                 
                 <div class="case-study-card">
-                    <img src="images/case2.jpg" alt="Retail AI" class="case-study-img">
+                    <img src="images/case2.jpg" alt="Retail Inventory Optimization with AI" class="case-study-img">
                     <div class="case-study-content">
                         <h3 class="case-study-title">Retail Inventory Optimization</h3>
                         <p class="case-study-description">Developed an AI solution for inventory management that reduced stockouts by 42% and decreased excess inventory costs by 28% for a national retail chain.</p>
-                        <a href="#" class="case-study-link">Read More</a>
+                        <a href="/pages/case-studies/retail-inventory-optimization.html" class="case-study-link">Read More</a>
                     </div>
                 </div>
                 
                 <div class="case-study-card">
-                    <img src="images/case3.jpg" alt="Financial AI" class="case-study-img">
+                    <img src="images/case3.jpg" alt="Financial Fraud Detection with AI" class="case-study-img">
                     <div class="case-study-content">
                         <h3 class="case-study-title">Financial Fraud Detection</h3>
                         <p class="case-study-description">Implemented an advanced AI fraud detection system for a financial institution that increased fraud detection by 67% while reducing false positives by 53%.</p>
-                        <a href="#" class="case-study-link">Read More</a>
+                        <a href="/pages/case-studies/financial-fraud-detection.html" class="case-study-link">Read More</a>
                     </div>
                 </div>
+            </div>
+            
+            <div class="case-studies-cta">
+                <a href="/pages/case-studies.html" class="btn">View All Case Studies</a>
             </div>
         </div>
     </section>
@@ -168,125 +162,77 @@
         <div class="container">
             <h2 class="cta-title">Ready to Transform Your Business with AI?</h2>
             <p class="cta-subtitle">Let's discuss how our AI consulting services can help you achieve your business goals and stay ahead of the competition.</p>
-            <a href="#contact" class="btn">Contact Us Today</a>
+            <a href="/pages/contact.html" class="btn">Contact Us Today</a>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- Latest Insights Section -->
+    <section id="insights" class="insights">
         <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <p class="section-subtitle">Have questions about our AI consulting services? Contact us today and our team will get back to you as soon as possible.</p>
+            <h2 class="section-title">Latest AI Insights</h2>
+            <p class="section-subtitle">Stay updated with our latest articles, research, and thoughts on artificial intelligence and its business applications.</p>
             
-            <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Contact Information</h3>
-                    <div class="contact-details">
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-map-marker-alt"></i>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="images/blog/generative-ai-trends.jpg" alt="Generative AI Trends" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-date">April 10, 2025</span>
+                        <h3 class="blog-title">5 Generative AI Trends Reshaping Business in 2025</h3>
+                        <p class="blog-excerpt">Explore how generative AI is transforming business operations, customer experiences, and product development across industries.</p>
+                        <div class="blog-footer">
+                            <div class="blog-author">
+                                <img src="images/team/author1.jpg" alt="Author" class="blog-author-img">
+                                <span class="blog-author-name">Sarah Chen</span>
                             </div>
-                            <p>Dubai, UAE</p>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <p>+971 55 748 4889</p>
-                        </div>
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <p>it@jditandevents.com</p>
+                            <a href="/pages/blog/generative-ai-trends.html" class="blog-link">Read More</a>
                         </div>
                     </div>
                 </div>
                 
-                <div class="contact-form">
-                    <form name="contactForm" id="contactForm"
-                          method="POST"
-                          data-netlify="true"
-                          data-netlify-recaptcha="true">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
+                <div class="blog-card">
+                    <img src="images/blog/ai-implementation.jpg" alt="AI Implementation" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-date">March 28, 2025</span>
+                        <h3 class="blog-title">The Complete Guide to Successful AI Implementation</h3>
+                        <p class="blog-excerpt">Learn the key steps and best practices for implementing AI solutions that deliver measurable business value and ROI.</p>
+                        <div class="blog-footer">
+                            <div class="blog-author">
+                                <img src="images/team/author2.jpg" alt="Author" class="blog-author-img">
+                                <span class="blog-author-name">Michael Rodriguez</span>
+                            </div>
+                            <a href="/pages/blog/ai-implementation-guide.html" class="blog-link">Read More</a>
                         </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <input type="text" id="subject" name="subject" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
-                        </div>
-                        <div data-netlify-recaptcha="true"></div>
-                        <input type="hidden" name="form-name" value="contactForm" />
-                        <button type="submit" class="btn">Send Message</button>
-                    </form>
+                    </div>
                 </div>
+                
+                <div class="blog-card">
+                    <img src="images/blog/ethical-ai.jpg" alt="Ethical AI" class="blog-img">
+                    <div class="blog-content">
+                        <span class="blog-date">March 15, 2025</span>
+                        <h3 class="blog-title">Building Ethical AI Systems: A Framework for Businesses</h3>
+                        <p class="blog-excerpt">Discover how to develop and deploy AI systems that are not only powerful but also ethical, transparent, and responsible.</p>
+                        <div class="blog-footer">
+                            <div class="blog-author">
+                                <img src="images/team/author3.jpg" alt="Author" class="blog-author-img">
+                                <span class="blog-author-name">Aisha Johnson</span>
+                            </div>
+                            <a href="/pages/blog/ethical-ai-framework.html" class="blog-link">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="insights-cta">
+                <a href="/pages/blog.html" class="btn">View All Insights</a>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-container">
-                <div class="footer-about">
-                    <div class="footer-logo">JD<span>IT</span></div>
-                    <p class="footer-description">We help businesses leverage the power of AI to transform operations, enhance decision-making, and drive innovation.</p>
-                    <div class="footer-social">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                    </div>
-                </div>
-                
-                <div class="footer-links">
-                    <h3 class="footer-title">Quick Links</h3>
-                    <ul>
-                        <li><a href="#services">Services</a></li>
-                        <li><a href="#benefits">Benefits</a></li>
-                        <li><a href="#case-studies">Case Studies</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h3 class="footer-title">Services</h3>
-                    <ul>
-                        <li><a href="#">Business Analysis</a></li>
-                        <li><a href="#">AI Strategy Development</a></li>
-                        <li><a href="#">Data Qualification</a></li>
-                        <li><a href="#">AI Product Solutions</a></li>
-                        <li><a href="#">Integration & Deployment</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-links">
-                    <h3 class="footer-title">Resources</h3>
-                    <ul>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Whitepapers</a></li>
-                        <li><a href="#">Case Studies</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2025 JD IT & ENTERTAINMENT. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <include src="/pages/footer.html"></include>
 
     <!-- JavaScript -->
+    <script src="js/include-html.js"></script>
     <script src="js/main.js"></script>
 </body>
 </html>

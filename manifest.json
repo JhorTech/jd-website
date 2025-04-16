@@ -1,0 +1,21 @@
+{
+  "name": "JD IT & ENTERTAINMENT",
+  "short_name": "JDIT",
+  "description": "AI consulting services to help businesses leverage artificial intelligence for transformation and innovation",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffc107",
+  "icons": [
+    {
+      "src": "/images/favicon/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
