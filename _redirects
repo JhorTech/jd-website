@@ -1,5 +1,0 @@
-# Redirect default Netlify subdomain to primary domain
-https://jditandevents.netlify.app/* https://jditandevents.com/:splat 301!
-
-# Handle 404 errors only
-/* /index.html 404
