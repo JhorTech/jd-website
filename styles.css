@@ -1522,17 +1522,83 @@ select.error:focus {
 
 /* Dark Mode Styles */
 [data-theme="dark"] {
-    --color-background: #1a1a1a;
+    --color-background: #121212;
     --color-text: #ffffff;
-    --color-text-light: #a0a0a0;
+    --color-text-light: #b3b3b3;
     --color-primary: #ffd700;
     --color-primary-dark: #ffc107;
-    --color-secondary: #2c2c2c;
-    --color-white: #2c2c2c;
+    --color-secondary: #1e1e1e;
+    --color-white: #1e1e1e;
+    --color-card-bg: #1e1e1e;
+    --color-border: #333333;
+    --color-hover: #2d2d2d;
+}
+
+[data-theme="dark"] body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+[data-theme="dark"] header {
+    background-color: rgba(30, 30, 30, 0.95);
+    border-bottom: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .nav-item a {
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .nav-item a:hover {
+    color: var(--color-primary);
+}
+
+[data-theme="dark"] .service-card,
+[data-theme="dark"] .case-study-card,
+[data-theme="dark"] .testimonial-card,
+[data-theme="dark"] .blog-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+}
+
+[data-theme="dark"] .service-card:hover,
+[data-theme="dark"] .case-study-card:hover,
+[data-theme="dark"] .testimonial-card:hover,
+[data-theme="dark"] .blog-card:hover {
+    background-color: var(--color-hover);
+}
+
+[data-theme="dark"] .section-title {
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .section-subtitle {
+    color: var(--color-text-light);
 }
 
 [data-theme="dark"] .search-overlay {
-    background: rgba(26, 26, 26, 0.98);
+    background: rgba(18, 18, 18, 0.98);
+}
+
+[data-theme="dark"] .search-form input {
+    background-color: var(--color-card-bg);
+    color: var(--color-text);
+    border-color: var(--color-border);
+}
+
+[data-theme="dark"] .search-result-item {
+    border-bottom-color: var(--color-border);
+}
+
+[data-theme="dark"] .search-result-item:hover {
+    background-color: var(--color-hover);
+}
+
+[data-theme="dark"] .search-result-item h3 {
+    color: var(--color-primary);
+}
+
+[data-theme="dark"] .search-result-item p {
+    color: var(--color-text-light);
 }
 
 [data-theme="dark"] .icon-button {
@@ -1540,15 +1606,28 @@ select.error:focus {
 }
 
 [data-theme="dark"] .icon-button:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--color-hover);
 }
 
-[data-theme="dark"] .search-result-item {
-    border-bottom-color: #333;
+[data-theme="dark"] .search-close {
+    color: var(--color-text);
 }
 
-[data-theme="dark"] .search-result-item:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+[data-theme="dark"] .search-close:hover {
+    background-color: var(--color-hover);
+}
+
+[data-theme="dark"] .progress-bar {
+    background: var(--color-primary);
+}
+
+[data-theme="dark"] .back-to-top {
+    background: var(--color-primary);
+    color: var(--color-background);
+}
+
+[data-theme="dark"] .back-to-top:hover {
+    background: var(--color-primary-dark);
 }
 
 /* Progress Bar */
@@ -1591,4 +1670,81 @@ select.error:focus {
 .back-to-top:hover {
     transform: translateY(-5px);
     background: var(--color-primary-dark);
+}
+
+/* Search Results Styles */
+.search-section {
+    margin-bottom: 2rem;
+}
+
+.search-section-title {
+    font-size: 1.2rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.search-result-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-result-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.search-result-item h4 {
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.search-result-item p {
+    color: var(--text-color);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.search-result-item mark {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.1em 0.2em;
+    border-radius: 2px;
+}
+
+.no-results {
+    text-align: center;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    padding: 2rem;
+}
+
+.error {
+    color: var(--error-color);
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Dark mode adjustments for search results */
+[data-theme="dark"] .search-result-item {
+    background: var(--card-bg);
+    border-color: var(--border-color);
+}
+
+[data-theme="dark"] .search-result-item mark {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+[data-theme="dark"] .search-section-title {
+    border-color: var(--border-color);
 }

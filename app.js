@@ -518,6 +518,13 @@ class SearchManager {
         this.searchInput = document.getElementById('search-input');
         this.searchResults = document.getElementById('search-results');
         
+        this.searchableSections = [
+            { selector: 'h1', weight: 3 },
+            { selector: 'h2', weight: 2 },
+            { selector: 'h3', weight: 1 },
+            { selector: 'p', weight: 0.5 }
+        ];
+        
         this.init();
     }
 
@@ -525,6 +532,7 @@ class SearchManager {
         this.searchToggle.addEventListener('click', () => this.openSearch());
         this.searchClose.addEventListener('click', () => this.closeSearch());
         this.searchForm.addEventListener('submit', (e) => this.handleSearch(e));
+        this.searchInput.addEventListener('input', (e) => this.handleSearch(e));
         
         // Close search on escape key
         document.addEventListener('keydown', (e) => {
@@ -551,7 +559,10 @@ class SearchManager {
         e.preventDefault();
         const query = this.searchInput.value.trim();
         
-        if (!query) return;
+        if (!query) {
+            this.searchResults.innerHTML = '';
+            return;
+        }
         
         try {
             const results = await this.searchContent(query);
@@ -563,39 +574,105 @@ class SearchManager {
     }
 
     async searchContent(query) {
-        // This is a simple search implementation
-        // In a real application, you would typically use a search API or service
-        const searchableContent = document.querySelectorAll('h1, h2, h3, p');
+        const searchTerms = query.toLowerCase().split(' ');
         const results = [];
 
-        searchableContent.forEach(element => {
-            const text = element.textContent.toLowerCase();
-            if (text.includes(query.toLowerCase())) {
-                results.push({
-                    title: element.tagName.toLowerCase(),
-                    text: element.textContent,
-                    url: window.location.pathname
-                });
-            }
+        this.searchableSections.forEach(({ selector, weight }) => {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(element => {
+                const text = element.textContent.toLowerCase();
+                const relevance = this.calculateRelevance(text, searchTerms) * weight;
+                
+                if (relevance > 0) {
+                    results.push({
+                        element: element,
+                        text: element.textContent,
+                        relevance: relevance,
+                        type: selector
+                    });
+                }
+            });
         });
 
-        return results;
+        // Sort by relevance
+        results.sort((a, b) => b.relevance - a.relevance);
+
+        // Group results by section
+        const groupedResults = this.groupResultsBySection(results);
+
+        return groupedResults;
     }
 
-    displayResults(results) {
-        if (results.length === 0) {
-            this.searchResults.innerHTML = '<p>No results found.</p>';
+    calculateRelevance(text, searchTerms) {
+        let relevance = 0;
+        searchTerms.forEach(term => {
+            if (text.includes(term)) {
+                relevance += 1;
+                // Bonus for exact matches
+                if (text === term) relevance += 2;
+                // Bonus for matches at the start of words
+                if (text.includes(` ${term}`)) relevance += 0.5;
+            }
+        });
+        return relevance;
+    }
+
+    groupResultsBySection(results) {
+        const sections = new Map();
+        
+        results.forEach(result => {
+            const section = this.findParentSection(result.element);
+            if (!sections.has(section)) {
+                sections.set(section, []);
+            }
+            sections.get(section).push(result);
+        });
+
+        return Array.from(sections.entries()).map(([section, results]) => ({
+            section: section,
+            results: results
+        }));
+    }
+
+    findParentSection(element) {
+        let current = element;
+        while (current && !current.id) {
+            current = current.parentElement;
+        }
+        return current ? current.id : 'main';
+    }
+
+    displayResults(groupedResults) {
+        if (groupedResults.length === 0) {
+            this.searchResults.innerHTML = '<p class="no-results">No results found.</p>';
             return;
         }
 
-        const html = results.map(result => `
-            <div class="search-result-item">
-                <h3>${result.title}</h3>
-                <p>${result.text}</p>
+        const html = groupedResults.map(group => `
+            <div class="search-section">
+                <h3 class="search-section-title">${group.section}</h3>
+                ${group.results.map(result => `
+                    <div class="search-result-item">
+                        <h4>${result.type.toUpperCase()}</h4>
+                        <p>${this.highlightSearchTerms(result.text, this.searchInput.value)}</p>
+                    </div>
+                `).join('')}
             </div>
         `).join('');
 
         this.searchResults.innerHTML = html;
+    }
+
+    highlightSearchTerms(text, query) {
+        const terms = query.toLowerCase().split(' ');
+        let highlightedText = text;
+        
+        terms.forEach(term => {
+            const regex = new RegExp(`(${term})`, 'gi');
+            highlightedText = highlightedText.replace(regex, '<mark>$1</mark>');
+        });
+        
+        return highlightedText;
     }
 }
 
