@@ -481,17 +481,192 @@ class FormErrorHandler {
     }
 }
 
+// Theme Management
+class ThemeManager {
+    constructor() {
+        this.themeToggle = document.getElementById('theme-toggle');
+        this.themeIcon = this.themeToggle.querySelector('i');
+        this.theme = localStorage.getItem('theme') || 'light';
+        
+        this.init();
+    }
+
+    init() {
+        this.applyTheme();
+        this.themeToggle.addEventListener('click', () => this.toggleTheme());
+    }
+
+    applyTheme() {
+        document.documentElement.setAttribute('data-theme', this.theme);
+        this.themeIcon.className = this.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    }
+
+    toggleTheme() {
+        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('theme', this.theme);
+        this.applyTheme();
+    }
+}
+
+// Search Functionality
+class SearchManager {
+    constructor() {
+        this.searchToggle = document.getElementById('search-toggle');
+        this.searchOverlay = document.getElementById('search-overlay');
+        this.searchClose = document.getElementById('search-close');
+        this.searchForm = document.getElementById('search-form');
+        this.searchInput = document.getElementById('search-input');
+        this.searchResults = document.getElementById('search-results');
+        
+        this.init();
+    }
+
+    init() {
+        this.searchToggle.addEventListener('click', () => this.openSearch());
+        this.searchClose.addEventListener('click', () => this.closeSearch());
+        this.searchForm.addEventListener('submit', (e) => this.handleSearch(e));
+        
+        // Close search on escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && this.searchOverlay.classList.contains('active')) {
+                this.closeSearch();
+            }
+        });
+    }
+
+    openSearch() {
+        this.searchOverlay.classList.add('active');
+        this.searchInput.focus();
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeSearch() {
+        this.searchOverlay.classList.remove('active');
+        this.searchInput.value = '';
+        this.searchResults.innerHTML = '';
+        document.body.style.overflow = '';
+    }
+
+    async handleSearch(e) {
+        e.preventDefault();
+        const query = this.searchInput.value.trim();
+        
+        if (!query) return;
+        
+        try {
+            const results = await this.searchContent(query);
+            this.displayResults(results);
+        } catch (error) {
+            console.error('Search failed:', error);
+            this.searchResults.innerHTML = '<p class="error">Search failed. Please try again.</p>';
+        }
+    }
+
+    async searchContent(query) {
+        // This is a simple search implementation
+        // In a real application, you would typically use a search API or service
+        const searchableContent = document.querySelectorAll('h1, h2, h3, p');
+        const results = [];
+
+        searchableContent.forEach(element => {
+            const text = element.textContent.toLowerCase();
+            if (text.includes(query.toLowerCase())) {
+                results.push({
+                    title: element.tagName.toLowerCase(),
+                    text: element.textContent,
+                    url: window.location.pathname
+                });
+            }
+        });
+
+        return results;
+    }
+
+    displayResults(results) {
+        if (results.length === 0) {
+            this.searchResults.innerHTML = '<p>No results found.</p>';
+            return;
+        }
+
+        const html = results.map(result => `
+            <div class="search-result-item">
+                <h3>${result.title}</h3>
+                <p>${result.text}</p>
+            </div>
+        `).join('');
+
+        this.searchResults.innerHTML = html;
+    }
+}
+
+// Progress Bar
+class ProgressBar {
+    constructor() {
+        this.progressBar = document.createElement('div');
+        this.progressBar.className = 'progress-bar';
+        document.body.appendChild(this.progressBar);
+        
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('scroll', () => this.updateProgress());
+        this.updateProgress();
+    }
+
+    updateProgress() {
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = (window.scrollY / windowHeight) * 100;
+        this.progressBar.style.width = `${progress}%`;
+    }
+}
+
+// Back to Top Button
+class BackToTop {
+    constructor() {
+        this.button = document.createElement('button');
+        this.button.className = 'back-to-top';
+        this.button.innerHTML = '<i class="fas fa-arrow-up"></i>';
+        this.button.setAttribute('aria-label', 'Back to top');
+        document.body.appendChild(this.button);
+        
+        this.init();
+    }
+
+    init() {
+        window.addEventListener('scroll', () => this.toggleVisibility());
+        this.button.addEventListener('click', () => this.scrollToTop());
+    }
+
+    toggleVisibility() {
+        if (window.scrollY > 300) {
+            this.button.classList.add('visible');
+        } else {
+            this.button.classList.remove('visible');
+        }
+    }
+
+    scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}
+
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize AOS
+    // Initialize existing features
     AOS.init({
         duration: 800,
         once: true
     });
-
-    // Initialize loading states
     new LoadingState();
-
-    // Initialize form error handling
     new FormErrorHandler();
+
+    // Initialize new features
+    new ThemeManager();
+    new SearchManager();
+    new ProgressBar();
+    new BackToTop();
 }); 
