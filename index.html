@@ -7,6 +7,105 @@
     <meta name="keywords" content="AI consulting, artificial intelligence, machine learning, data analytics, business transformation, AI solutions, AI strategy, enterprise AI">
     <title>JD IT & ENTERTAINMENT - Enterprise AI Consulting & Solutions</title>
     
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    
+    <!-- Critical CSS -->
+    <style>
+        /* Critical path CSS */
+        :root {
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --color-primary: #ffc107;
+            --color-accent: #FF3D00;
+            --color-secondary: #2C2C2E;
+            --color-dark: #1A1A1A;
+            --color-text: #333;
+            --color-background: #f8f9fa;
+            --color-white: #fff;
+        }
+        
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            line-height: 1.5;
+            color: var(--color-text);
+            background-color: var(--color-background);
+        }
+        
+        /* Header styles */
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Hero section */
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('images/hero-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Loading animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+    
+    <!-- Non-critical CSS -->
+    <link rel="stylesheet" href="styles.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="styles.css"></noscript>
+    
+    <!-- Fonts with font-display: swap -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@400;500;700&display=swap" media="print" onload="this.media='all'">
+    
+    <!-- Font Awesome with preload -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"></noscript>
+    
+    <!-- AOS Library with preload -->
+    <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css"></noscript>
+    
+    <!-- Canonical link -->
+    <link rel="canonical" href="https://jditandevents.com/">
+    
     <!-- Schema.org markup -->
     <script type="application/ld+json">
     {
@@ -28,14 +127,6 @@
     }
     </script>
     
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="multi-page.css">
-    <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- AOS Library -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-    <!-- Canonical link -->
-    <link rel="canonical" href="https://jditandevents.com/">
     <!-- Fix for component inclusion -->
     <script>
     document.addEventListener('DOMContentLoaded', function() {

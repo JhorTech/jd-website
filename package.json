@@ -1,0 +1,21 @@
+{
+  "name": "jd-it-website",
+  "version": "1.0.0",
+  "description": "JD IT & ENTERTAINMENT Website",
+  "scripts": {
+    "build": "npm run build:css && npm run build:js && npm run build:html",
+    "build:css": "npm run purgecss && npm run minify:css",
+    "build:js": "npm run minify:js",
+    "build:html": "npm run minify:html",
+    "purgecss": "purgecss --css styles.css --content '**/*.html' --output styles.purged.css",
+    "minify:css": "cleancss -o dist/css/styles.min.css styles.purged.css && cleancss -o dist/css/multi-page.min.css multi-page.css",
+    "minify:js": "terser app.js -o dist/js/app.min.js && terser optimizations.js -o dist/js/optimizations.min.js",
+    "minify:html": "html-minifier --collapse-whitespace --remove-comments --remove-optional-tags --remove-redundant-attributes --remove-script-type-attributes --remove-tag-whitespace --use-short-doctype --minify-css true --minify-js true --input-dir . --output-dir dist --file-ext html"
+  },
+  "devDependencies": {
+    "clean-css-cli": "^5.6.0",
+    "html-minifier": "^4.0.0",
+    "purgecss": "^5.0.0",
+    "terser": "^5.19.2"
+  }
+} 
