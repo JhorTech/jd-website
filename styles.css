@@ -607,6 +607,7 @@ footer {
         align-items: center;
         padding: var(--spacing-xl) 0;
         transition: 0.3s ease;
+        z-index: 999;
     }
 
     .nav-menu.active {
@@ -615,10 +616,19 @@ footer {
 
     .nav-item {
         margin: var(--spacing-md) 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-item a {
+        display: block;
+        padding: 10px 20px;
+        font-size: 1.1rem;
     }
 
     .mobile-menu-btn {
         display: block;
+        z-index: 1000;
     }
 
     .mobile-menu-btn.active div:nth-child(1) {
@@ -633,24 +643,52 @@ footer {
         transform: rotate(45deg) translate(-5px, -6px);
     }
 
-    .hero-title {
-        font-size: 2.5rem;
+    /* Breadcrumbs mobile styles */
+    .breadcrumbs {
+        padding: 10px 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
-    .hero-subtitle {
-        font-size: 1.2rem;
+    .breadcrumbs-container {
+        min-width: max-content;
+        padding: 0 15px;
     }
 
-    .section-title {
-        font-size: 2rem;
+    .breadcrumbs-list {
+        white-space: nowrap;
     }
 
-    .cta-title {
-        font-size: 2rem;
+    .breadcrumbs-item {
+        font-size: 0.85rem;
     }
 
-    .footer-about {
-        grid-column: span 1;
+    .breadcrumbs-item:not(:last-child)::after {
+        margin: 0 8px;
+    }
+
+    /* Prevent body scroll when mobile menu is open */
+    body.menu-open {
+        overflow: hidden;
+    }
+}
+
+/* Dark mode adjustments for mobile */
+@media screen and (max-width: 768px) {
+    [data-theme="dark"] .nav-menu {
+        background: rgba(33, 33, 33, 0.98);
+    }
+
+    [data-theme="dark"] .nav-item a {
+        color: var(--color-text);
+    }
+
+    [data-theme="dark"] .nav-item a:hover {
+        color: var(--color-primary);
+    }
+
+    [data-theme="dark"] .mobile-menu-btn div {
+        background-color: var(--color-text);
     }
 }
 
