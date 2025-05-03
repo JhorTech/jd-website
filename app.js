@@ -764,16 +764,35 @@ class BackToTop {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOM loaded, initializing features...');
+    console.log('DOM loaded, waiting for header...');
 
-    // Initialize AOS
-    AOS.init({
-        duration: 800,
-        once: true
-    });
+    // Wait for header to be loaded
+    const waitForHeader = setInterval(() => {
+        const themeToggle = document.getElementById('theme-toggle');
+        const searchToggle = document.getElementById('search-toggle');
+        
+        if (themeToggle && searchToggle) {
+            clearInterval(waitForHeader);
+            console.log('Header loaded, initializing features...');
+            initializeFeatures();
+        }
+    }, 100);
 
-    // Initialize features
+    // Timeout after 5 seconds
+    setTimeout(() => {
+        clearInterval(waitForHeader);
+        console.error('Header failed to load within timeout');
+    }, 5000);
+});
+
+function initializeFeatures() {
     try {
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            once: true
+        });
+
         // Initialize theme manager
         const themeManager = new ThemeManager();
         console.log('Theme Manager initialized:', themeManager);
@@ -812,4 +831,4 @@ document.addEventListener('DOMContentLoaded', () => {
     } catch (error) {
         console.error('Error initializing features:', error);
     }
-}); 
+} 
