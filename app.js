@@ -498,13 +498,17 @@ class ThemeManager {
 
     init() {
         this.applyTheme();
-        this.themeToggle.addEventListener('click', () => this.toggleTheme());
+        this.themeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.toggleTheme();
+        });
         console.log('Theme manager initialized with theme:', this.theme);
     }
 
     applyTheme() {
         document.documentElement.setAttribute('data-theme', this.theme);
         this.themeIcon.className = this.theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        document.body.classList.toggle('dark-theme', this.theme === 'dark');
     }
 
     toggleTheme() {
@@ -768,8 +772,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const waitForHeader = setInterval(() => {
         const themeToggle = document.getElementById('theme-toggle');
         const searchToggle = document.getElementById('search-toggle');
+        const headerContainer = document.querySelector('.header-container');
         
-        if (themeToggle && searchToggle) {
+        if (themeToggle && searchToggle && headerContainer) {
             clearInterval(waitForHeader);
             console.log('Header loaded, initializing features...');
             initializeFeatures();
@@ -811,20 +816,8 @@ function initializeFeatures() {
         console.log('Search toggle button:', searchToggle);
         console.log('Theme toggle button:', themeToggle);
 
-        // Add click event listeners directly to ensure they work
-        if (searchToggle) {
-            searchToggle.addEventListener('click', () => {
-                console.log('Search toggle clicked');
-                searchManager.openSearch();
-            });
-        }
-
-        if (themeToggle) {
-            themeToggle.addEventListener('click', () => {
-                console.log('Theme toggle clicked');
-                themeManager.toggleTheme();
-            });
-        }
+        // Remove direct event listeners since they're already handled in their respective classes
+        // The ThemeManager and SearchManager classes already handle their own event listeners
 
     } catch (error) {
         console.error('Error initializing features:', error);
