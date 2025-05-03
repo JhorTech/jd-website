@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - JD IT Solutions</title>
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1f2937;
+            --background-color: #f3f4f6;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .error-container {
+            max-width: 600px;
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        p {
+            margin-bottom: 2rem;
+            color: #4b5563;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #e5e7eb;
+            color: var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background-color: #d1d5db;
+            transform: translateY(-2px);
+        }
+
+        .error-illustration {
+            max-width: 300px;
+            margin: 0 auto 2rem;
+        }
+
+        @media (max-width: 640px) {
+            .error-container {
+                padding: 1.5rem;
+            }
+
+            .error-code {
+                font-size: 6rem;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-illustration">
+            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <path fill="#2563eb" d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,79.6,-45.8C87.4,-32.5,90,-16.3,89.4,-0.3C88.8,15.7,85,31.3,77.1,45.2C69.2,59.1,57.2,71.2,42.8,77.6C28.4,84,14.2,84.7,-0.7,85.9C-15.6,87.1,-31.2,88.8,-45.8,83.4C-60.4,78,-74,65.5,-81.6,49.8C-89.2,34.1,-90.8,15.2,-89.9,-3.5C-89,-22.2,-85.6,-40.7,-76.3,-55.9C-67,-71.1,-51.8,-83,-35.6,-88.2C-19.4,-93.4,-2.2,-91.9,12.3,-86.1C26.8,-80.3,30.6,-83.6,44.7,-76.4Z" transform="translate(100 100)" />
+            </svg>
+        </div>
+        <div class="error-code">404</div>
+        <h1>Page Not Found</h1>
+        <p>Oops! The page you're looking for seems to have vanished into the digital void. Let's get you back on track.</p>
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">Go Home</a>
+            <a href="/contact.html" class="btn btn-secondary">Contact Support</a>
+        </div>
+    </div>
+</body>
+</html> 

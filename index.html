@@ -451,8 +451,63 @@
     <!-- Footer -->
     <include src="footer.html"></include>
 
+    <!-- Cookie Consent Banner -->
+    <div id="cookie-consent" class="cookie-consent" role="alert" aria-live="polite">
+        <div class="cookie-content">
+            <p>We use cookies to enhance your browsing experience, serve personalized content, and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button id="cookie-accept-all" class="btn btn-primary">Accept All</button>
+                <button id="cookie-settings" class="btn btn-secondary">Cookie Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cookie Settings Modal -->
+    <div id="cookie-settings-modal" class="modal" role="dialog" aria-labelledby="cookie-settings-title">
+        <div class="modal-content">
+            <h2 id="cookie-settings-title">Cookie Settings</h2>
+            <div class="cookie-options">
+                <div class="cookie-option">
+                    <label class="switch">
+                        <input type="checkbox" id="essential-cookies" checked disabled>
+                        <span class="slider"></span>
+                    </label>
+                    <div class="cookie-option-text">
+                        <h3>Essential Cookies</h3>
+                        <p>Required for the website to function properly. Cannot be disabled.</p>
+                    </div>
+                </div>
+                <div class="cookie-option">
+                    <label class="switch">
+                        <input type="checkbox" id="analytics-cookies">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="cookie-option-text">
+                        <h3>Analytics Cookies</h3>
+                        <p>Help us understand how visitors interact with our website.</p>
+                    </div>
+                </div>
+                <div class="cookie-option">
+                    <label class="switch">
+                        <input type="checkbox" id="marketing-cookies">
+                        <span class="slider"></span>
+                    </label>
+                    <div class="cookie-option-text">
+                        <h3>Marketing Cookies</h3>
+                        <p>Used to track visitors across websites for marketing purposes.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="save-cookie-settings" class="btn btn-primary">Save Preferences</button>
+                <button id="close-cookie-settings" class="btn btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
     <!-- JavaScript -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script src="app.js"></script>
+    <script src="cookie-consent.js"></script>
 </body>
 </html>

@@ -240,4 +240,258 @@ function validateInput(input) {
     }
     
     return isValid;
-} 
+}
+
+// Loading State Management
+class LoadingState {
+    constructor() {
+        this.skeletons = {
+            caseStudies: document.querySelector('.case-studies-grid'),
+            testimonials: document.querySelector('.testimonials-grid'),
+            blogPosts: document.querySelector('.blog-grid')
+        };
+        
+        this.init();
+    }
+
+    init() {
+        // Show skeletons while content loads
+        this.showSkeletons();
+        
+        // Simulate content loading (replace with actual content loading)
+        setTimeout(() => {
+            this.hideSkeletons();
+        }, 1500);
+    }
+
+    showSkeletons() {
+        Object.entries(this.skeletons).forEach(([key, element]) => {
+            if (element) {
+                const skeleton = this.createSkeleton(key);
+                element.style.display = 'none';
+                element.parentNode.insertBefore(skeleton, element);
+            }
+        });
+    }
+
+    hideSkeletons() {
+        Object.entries(this.skeletons).forEach(([key, element]) => {
+            if (element) {
+                const skeleton = document.querySelector(`.${key}-skeleton`);
+                if (skeleton) {
+                    skeleton.remove();
+                }
+                element.style.display = '';
+            }
+        });
+    }
+
+    createSkeleton(type) {
+        const skeleton = document.createElement('div');
+        skeleton.className = `${type}-skeleton`;
+
+        switch (type) {
+            case 'caseStudies':
+                skeleton.innerHTML = this.createCaseStudySkeleton();
+                break;
+            case 'testimonials':
+                skeleton.innerHTML = this.createTestimonialSkeleton();
+                break;
+            case 'blogPosts':
+                skeleton.innerHTML = this.createBlogSkeleton();
+                break;
+        }
+
+        return skeleton;
+    }
+
+    createCaseStudySkeleton() {
+        return `
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+        `;
+    }
+
+    createTestimonialSkeleton() {
+        return `
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-avatar"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-avatar"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-avatar"></div>
+                <div class="skeleton skeleton-text"></div>
+            </div>
+        `;
+    }
+
+    createBlogSkeleton() {
+        return `
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-avatar"></div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-avatar"></div>
+            </div>
+            <div class="skeleton-card">
+                <div class="skeleton skeleton-image"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-avatar"></div>
+            </div>
+        `;
+    }
+}
+
+// Form Error Handling
+class FormErrorHandler {
+    constructor() {
+        this.forms = document.querySelectorAll('form');
+        this.init();
+    }
+
+    init() {
+        this.forms.forEach(form => {
+            form.addEventListener('submit', (e) => this.handleSubmit(e));
+            this.setupValidation(form);
+        });
+    }
+
+    setupValidation(form) {
+        const inputs = form.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('invalid', (e) => this.handleInvalid(e));
+            input.addEventListener('input', () => this.validateInput(input));
+        });
+    }
+
+    handleInvalid(e) {
+        e.preventDefault();
+        const input = e.target;
+        this.showError(input);
+    }
+
+    validateInput(input) {
+        if (input.validity.valid) {
+            this.hideError(input);
+        } else {
+            this.showError(input);
+        }
+    }
+
+    showError(input) {
+        const errorMessage = this.getErrorMessage(input);
+        let errorElement = input.parentNode.querySelector('.error-message');
+        
+        if (!errorElement) {
+            errorElement = document.createElement('div');
+            errorElement.className = 'error-message';
+            input.parentNode.appendChild(errorElement);
+        }
+        
+        errorElement.textContent = errorMessage;
+        input.classList.add('error');
+    }
+
+    hideError(input) {
+        const errorElement = input.parentNode.querySelector('.error-message');
+        if (errorElement) {
+            errorElement.remove();
+        }
+        input.classList.remove('error');
+    }
+
+    getErrorMessage(input) {
+        if (input.validity.valueMissing) {
+            return 'This field is required';
+        }
+        if (input.validity.typeMismatch) {
+            if (input.type === 'email') {
+                return 'Please enter a valid email address';
+            }
+            if (input.type === 'url') {
+                return 'Please enter a valid URL';
+            }
+        }
+        if (input.validity.tooShort) {
+            return `Please enter at least ${input.minLength} characters`;
+        }
+        if (input.validity.tooLong) {
+            return `Please enter no more than ${input.maxLength} characters`;
+        }
+        if (input.validity.patternMismatch) {
+            return 'Please enter a valid value';
+        }
+        return 'Please enter a valid value';
+    }
+
+    handleSubmit(e) {
+        const form = e.target;
+        const inputs = form.querySelectorAll('input, textarea, select');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (!input.validity.valid) {
+                this.showError(input);
+                isValid = false;
+            }
+        });
+
+        if (!isValid) {
+            e.preventDefault();
+        }
+    }
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize AOS
+    AOS.init({
+        duration: 800,
+        once: true
+    });
+
+    // Initialize loading states
+    new LoadingState();
+
+    // Initialize form error handling
+    new FormErrorHandler();
+}); 
