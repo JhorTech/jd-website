@@ -1,9 +1,113 @@
 // Initialize AOS
 AOS.init({
     duration: 800,
-    easing: 'ease-in-out',
     once: true,
-    mirror: false
+    offset: 100
+});
+
+// Image Lazy Loading
+document.addEventListener('DOMContentLoaded', function() {
+    const lazyImages = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        lazyImages.forEach(img => {
+            imageObserver.observe(img);
+        });
+    } else {
+        // Fallback for browsers that don't support IntersectionObserver
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+        });
+    }
+});
+
+// Smooth Scroll for Anchor Links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Form Validation and Submission
+const forms = document.querySelectorAll('form');
+forms.forEach(form => {
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Basic form validation
+        const requiredFields = form.querySelectorAll('[required]');
+        let isValid = true;
+        
+        requiredFields.forEach(field => {
+            if (!field.value.trim()) {
+                isValid = false;
+                field.classList.add('error');
+            } else {
+                field.classList.remove('error');
+            }
+        });
+        
+        if (!isValid) {
+            return;
+        }
+        
+        // Show loading state
+        const submitButton = form.querySelector('button[type="submit"]');
+        const originalText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Sending...';
+        
+        try {
+            // Simulate form submission (replace with actual API call)
+            await new Promise(resolve => setTimeout(resolve, 1500));
+            
+            // Show success message
+            form.innerHTML = `
+                <div class="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Thank you for your message!</h3>
+                    <p>We'll get back to you shortly.</p>
+                </div>
+            `;
+        } catch (error) {
+            // Show error message
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'error-message';
+            errorMessage.textContent = 'An error occurred. Please try again.';
+            form.insertBefore(errorMessage, submitButton);
+            
+            // Reset button
+            submitButton.disabled = false;
+            submitButton.textContent = originalText;
+        }
+    });
+});
+
+// Add loading animation to images
+document.querySelectorAll('img[loading="lazy"]').forEach(img => {
+    img.classList.add('loading');
+    img.addEventListener('load', function() {
+        this.classList.remove('loading');
+        this.classList.add('loaded');
+    });
 });
 
 // Form handling
@@ -109,18 +213,4 @@ function validateInput(input) {
     }
     
     return isValid;
-}
-
-// Smooth scroll for anchor links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-}); 
+} 
