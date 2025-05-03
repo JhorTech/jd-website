@@ -1427,6 +1427,8 @@ select.error:focus {
     align-items: center;
     gap: 1rem;
     margin-left: 2rem;
+    position: relative;
+    z-index: 1001;
 }
 
 .icon-button {
@@ -1443,11 +1445,39 @@ select.error:focus {
     justify-content: center;
     width: 40px;
     height: 40px;
+    position: relative;
+    z-index: 1002;
 }
 
 .icon-button:hover {
     background-color: rgba(0, 0, 0, 0.05);
     transform: translateY(-2px);
+}
+
+.icon-button:active {
+    transform: translateY(0);
+}
+
+/* Dark mode adjustments for header actions */
+[data-theme="dark"] .icon-button {
+    color: var(--color-text);
+}
+
+[data-theme="dark"] .icon-button:hover {
+    background-color: var(--color-hover);
+}
+
+/* Mobile adjustments for header actions */
+@media screen and (max-width: 768px) {
+    .header-actions {
+        margin-left: 1rem;
+    }
+
+    .icon-button {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
 }
 
 /* Search Overlay */
@@ -1630,14 +1660,6 @@ select.error:focus {
     color: var(--color-text-light);
 }
 
-[data-theme="dark"] .icon-button {
-    color: var(--color-text);
-}
-
-[data-theme="dark"] .icon-button:hover {
-    background-color: var(--color-hover);
-}
-
 [data-theme="dark"] .search-close {
     color: var(--color-text);
 }
@@ -1776,23 +1798,4 @@ select.error:focus {
 
 [data-theme="dark"] .search-section-title {
     border-color: var(--border-color);
-}
-
-/* Mobile Navigation */
-@media screen and (max-width: 768px) {
-    .header-container {
-        padding: 15px 0;
-    }
-
-    .header-actions {
-        position: static;
-        transform: none;
-        margin-left: auto;
-    }
-
-    .icon-button {
-        width: 36px;
-        height: 36px;
-        font-size: 1.1rem;
-    }
 }
