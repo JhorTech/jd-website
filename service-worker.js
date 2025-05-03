@@ -20,6 +20,9 @@ const urlsToCache = [
   '/pages/contact.html',
   '/images/hero-bg.jpg',
   '/images/cta-bg.jpg',
+  '/images/case1.jpg',
+  '/images/case2.jpg',
+  '/images/case3.jpg',
   // Add other important assets to cache
 ];
 
