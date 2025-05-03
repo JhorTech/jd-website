@@ -178,7 +178,6 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 20px 0;
-    position: relative;
 }
 
 .logo {
@@ -186,10 +185,17 @@ header {
     font-size: var(--text-xl);
     font-weight: 700;
     color: var(--color-secondary);
+    z-index: 2;
 }
 
 .logo span {
     color: var(--color-primary);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .nav-menu {
@@ -572,6 +578,20 @@ footer {
 @media screen and (max-width: 768px) {
     .header-container {
         padding: 15px 0;
+    }
+
+    nav {
+        gap: 1rem;
+    }
+
+    .header-actions {
+        margin-left: 1rem;
+    }
+
+    .icon-button {
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
     }
 
     .nav-menu {
@@ -1406,10 +1426,7 @@ select.error:focus {
     display: flex;
     align-items: center;
     gap: 1rem;
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
+    margin-left: 2rem;
 }
 
 .icon-button {
