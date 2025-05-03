@@ -488,12 +488,18 @@ class ThemeManager {
         this.themeIcon = this.themeToggle.querySelector('i');
         this.theme = localStorage.getItem('theme') || 'light';
         
+        if (!this.themeToggle) {
+            console.error('Theme toggle button not found');
+            return;
+        }
+
         this.init();
     }
 
     init() {
         this.applyTheme();
         this.themeToggle.addEventListener('click', () => this.toggleTheme());
+        console.log('Theme manager initialized with theme:', this.theme);
     }
 
     applyTheme() {
@@ -505,6 +511,7 @@ class ThemeManager {
         this.theme = this.theme === 'dark' ? 'light' : 'dark';
         localStorage.setItem('theme', this.theme);
         this.applyTheme();
+        console.log('Theme toggled to:', this.theme);
     }
 }
 
@@ -518,6 +525,11 @@ class SearchManager {
         this.searchInput = document.getElementById('search-input');
         this.searchResults = document.getElementById('search-results');
         
+        if (!this.searchToggle || !this.searchOverlay) {
+            console.error('Search elements not found');
+            return;
+        }
+
         this.searchableSections = [
             { selector: 'h1', weight: 3 },
             { selector: 'h2', weight: 2 },
@@ -529,26 +541,45 @@ class SearchManager {
     }
 
     init() {
-        this.searchToggle.addEventListener('click', () => this.openSearch());
-        this.searchClose.addEventListener('click', () => this.closeSearch());
-        this.searchForm.addEventListener('submit', (e) => this.handleSearch(e));
-        this.searchInput.addEventListener('input', (e) => this.handleSearch(e));
+        console.log('Initializing search manager');
+        this.searchToggle.addEventListener('click', () => {
+            console.log('Search toggle clicked');
+            this.openSearch();
+        });
+        
+        this.searchClose.addEventListener('click', () => {
+            console.log('Search close clicked');
+            this.closeSearch();
+        });
+        
+        this.searchForm.addEventListener('submit', (e) => {
+            console.log('Search form submitted');
+            this.handleSearch(e);
+        });
+        
+        this.searchInput.addEventListener('input', (e) => {
+            console.log('Search input changed');
+            this.handleSearch(e);
+        });
         
         // Close search on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && this.searchOverlay.classList.contains('active')) {
+                console.log('Escape key pressed');
                 this.closeSearch();
             }
         });
     }
 
     openSearch() {
+        console.log('Opening search overlay');
         this.searchOverlay.classList.add('active');
         this.searchInput.focus();
         document.body.style.overflow = 'hidden';
     }
 
     closeSearch() {
+        console.log('Closing search overlay');
         this.searchOverlay.classList.remove('active');
         this.searchInput.value = '';
         this.searchResults.innerHTML = '';
@@ -733,17 +764,21 @@ class BackToTop {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize existing features
+    // Initialize AOS
     AOS.init({
         duration: 800,
         once: true
     });
-    new LoadingState();
-    new FormErrorHandler();
 
-    // Initialize new features
-    new ThemeManager();
-    new SearchManager();
-    new ProgressBar();
-    new BackToTop();
+    // Initialize features
+    const loadingState = new LoadingState();
+    const formErrorHandler = new FormErrorHandler();
+    const themeManager = new ThemeManager();
+    const searchManager = new SearchManager();
+    const progressBar = new ProgressBar();
+    const backToTop = new BackToTop();
+
+    // Debug logging
+    console.log('Theme Manager initialized:', themeManager);
+    console.log('Search Manager initialized:', searchManager);
 }); 

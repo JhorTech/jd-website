@@ -1459,13 +1459,13 @@ select.error:focus {
     bottom: 0;
     background: rgba(255, 255, 255, 0.98);
     z-index: 1001;
-    display: none;
+    visibility: hidden;
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
 .search-overlay.active {
-    display: block;
+    visibility: visible;
     opacity: 1;
 }
 
@@ -1488,6 +1488,7 @@ select.error:focus {
     border: 2px solid var(--color-primary);
     border-radius: var(--radius-md);
     outline: none;
+    background: white;
 }
 
 .search-form button {
@@ -1516,6 +1517,7 @@ select.error:focus {
     padding: 0.5rem;
     border-radius: 50%;
     transition: all 0.3s ease;
+    z-index: 1002;
 }
 
 .search-close:hover {
