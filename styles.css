@@ -862,7 +862,7 @@ picture {
 
 .testimonial-card {
     background: var(--white);
-    border-radius: var(--border-radius);
+    border-radius: var(--radius-md);
     padding: 2rem;
     box-shadow: var(--shadow-sm);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -890,17 +890,23 @@ picture {
     gap: 1rem;
 }
 
-.testimonial-author picture {
+.author-image {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     overflow: hidden;
+    flex-shrink: 0;
 }
 
-.testimonial-author img {
+.author-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.testimonial-card:hover .author-image img {
+    transform: scale(1.1);
 }
 
 .author-info h4 {

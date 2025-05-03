@@ -14,11 +14,31 @@ document.addEventListener('DOMContentLoaded', function() {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.add('loaded');
+                    // Add loading class
+                    img.classList.add('loading');
+                    
+                    // Create a new image to preload
+                    const tempImage = new Image();
+                    tempImage.src = img.src;
+                    
+                    tempImage.onload = function() {
+                        img.classList.remove('loading');
+                        img.classList.add('loaded');
+                    };
+                    
+                    tempImage.onerror = function() {
+                        console.error('Failed to load image:', img.src);
+                        img.classList.remove('loading');
+                        // Optionally set a fallback image
+                        // img.src = 'images/placeholder.jpg';
+                    };
+                    
                     observer.unobserve(img);
                 }
             });
+        }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
         });
 
         lazyImages.forEach(img => {
@@ -27,7 +47,14 @@ document.addEventListener('DOMContentLoaded', function() {
     } else {
         // Fallback for browsers that don't support IntersectionObserver
         lazyImages.forEach(img => {
-            img.src = img.dataset.src;
+            img.classList.add('loading');
+            const tempImage = new Image();
+            tempImage.src = img.src;
+            
+            tempImage.onload = function() {
+                img.classList.remove('loading');
+                img.classList.add('loaded');
+            };
         });
     }
 });
