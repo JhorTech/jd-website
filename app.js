@@ -764,6 +764,8 @@ class BackToTop {
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOM loaded, initializing features...');
+
     // Initialize AOS
     AOS.init({
         duration: 800,
@@ -771,14 +773,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Initialize features
-    const loadingState = new LoadingState();
-    const formErrorHandler = new FormErrorHandler();
-    const themeManager = new ThemeManager();
-    const searchManager = new SearchManager();
-    const progressBar = new ProgressBar();
-    const backToTop = new BackToTop();
+    try {
+        // Initialize theme manager
+        const themeManager = new ThemeManager();
+        console.log('Theme Manager initialized:', themeManager);
 
-    // Debug logging
-    console.log('Theme Manager initialized:', themeManager);
-    console.log('Search Manager initialized:', searchManager);
+        // Initialize search manager
+        const searchManager = new SearchManager();
+        console.log('Search Manager initialized:', searchManager);
+
+        // Initialize other features
+        const loadingState = new LoadingState();
+        const formErrorHandler = new FormErrorHandler();
+        const progressBar = new ProgressBar();
+        const backToTop = new BackToTop();
+
+        // Debug logging for button elements
+        const searchToggle = document.getElementById('search-toggle');
+        const themeToggle = document.getElementById('theme-toggle');
+        console.log('Search toggle button:', searchToggle);
+        console.log('Theme toggle button:', themeToggle);
+
+        // Add click event listeners directly to ensure they work
+        if (searchToggle) {
+            searchToggle.addEventListener('click', () => {
+                console.log('Search toggle clicked');
+                searchManager.openSearch();
+            });
+        }
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                console.log('Theme toggle clicked');
+                themeManager.toggleTheme();
+            });
+        }
+
+    } catch (error) {
+        console.error('Error initializing features:', error);
+    }
 }); 

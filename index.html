@@ -181,25 +181,25 @@
         <button id="search-toggle" class="icon-button" aria-label="Search">
             <i class="fas fa-search"></i>
         </button>
-        <button id="theme-toggle" class="icon-button" aria-label="Toggle dark mode">
+        <button id="theme-toggle" class="icon-button" aria-label="Toggle theme">
             <i class="fas fa-moon"></i>
         </button>
     </div>
 
     <!-- Search Overlay -->
-    <div id="search-overlay" class="search-overlay" role="search">
+    <div id="search-overlay" class="search-overlay">
         <div class="search-container">
+            <button id="search-close" class="search-close" aria-label="Close search">
+                <i class="fas fa-times"></i>
+            </button>
             <form id="search-form" class="search-form">
-                <input type="search" id="search-input" placeholder="Search..." aria-label="Search">
+                <input type="text" id="search-input" placeholder="Search..." aria-label="Search input">
                 <button type="submit" aria-label="Submit search">
                     <i class="fas fa-search"></i>
                 </button>
             </form>
             <div id="search-results" class="search-results"></div>
         </div>
-        <button id="search-close" class="search-close" aria-label="Close search">
-            <i class="fas fa-times"></i>
-        </button>
     </div>
 
     <!-- Hero Section -->
