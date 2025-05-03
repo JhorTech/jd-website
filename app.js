@@ -74,7 +74,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // Form Validation and Submission
-const forms = document.querySelectorAll('form');
+const forms = document.querySelectorAll('form:not(#search-form)');
 forms.forEach(form => {
     form.addEventListener('submit', async function(e) {
         e.preventDefault();
