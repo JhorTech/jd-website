@@ -1,5 +1,25 @@
 /* Reset and Base Styles */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Lato:wght@400;500;700&display=swap');
+
 :root {
+    /* Typography */
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Lato', sans-serif;
+    
+    /* Type Scale */
+    --text-xs: 0.875rem;
+    --text-sm: 1rem;
+    --text-base: 1.1rem;
+    --text-lg: 1.25rem;
+    --text-xl: 1.5rem;
+    --text-2xl: 2rem;
+    --text-3xl: 2.5rem;
+    
+    /* Line Heights */
+    --leading-tight: 1.2;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+    
     /* Spacing Variables */
     --spacing-xs: 0.5rem;
     --spacing-sm: 1rem;
@@ -9,25 +29,47 @@
     
     /* Colors */
     --color-primary: #ffc107;
+    --color-primary-dark: #e0a800;
+    --color-accent: #FF3D00;
+    --color-accent-dark: #E03600;
+    --color-secondary: #2C2C2E;
     --color-dark: #1A1A1A;
     --color-text: #333;
     --color-text-light: #666;
     --color-background: #f8f9fa;
     --color-white: #fff;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-full: 9999px;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: var(--font-body);
 }
 
 body {
-    background-color: #f8f9fa;
-    color: #333;
-    line-height: 1.6;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: var(--leading-normal);
+    font-size: var(--text-base);
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    line-height: var(--leading-tight);
+    font-weight: 700;
+}
+
+h1 { font-size: var(--text-3xl); }
+h2 { font-size: var(--text-2xl); }
+h3 { font-size: var(--text-xl); }
+h4 { font-size: var(--text-lg); }
 
 a {
     text-decoration: none;
@@ -45,21 +87,34 @@ ul {
     padding: 0 20px;
 }
 
+/* Button Styles */
 .btn {
     display: inline-block;
     padding: 12px 30px;
-    background-color: #ffc107;
-    color: #333;
+    background-color: var(--color-primary);
+    color: var(--color-secondary);
     border: none;
-    border-radius: 4px;
+    border-radius: var(--radius-md);
     font-weight: 600;
+    font-size: var(--text-sm);
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #e0a800;
+    background-color: var(--color-primary-dark);
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+}
+
+.btn-accent {
+    background-color: var(--color-accent);
+    color: var(--color-white);
+}
+
+.btn-accent:hover {
+    background-color: var(--color-accent-dark);
+    box-shadow: 0 4px 12px rgba(255, 61, 0, 0.2);
 }
 
 section {
@@ -67,15 +122,18 @@ section {
 }
 
 .section-title {
-    font-size: 2.5rem;
-    margin-bottom: 20px;
+    font-family: var(--font-heading);
+    font-size: var(--text-3xl);
+    margin-bottom: var(--spacing-md);
     font-weight: 700;
+    color: var(--color-secondary);
 }
 
 .section-subtitle {
-    font-size: 1.2rem;
-    margin-bottom: 50px;
-    color: #666;
+    font-size: var(--text-lg);
+    margin-bottom: var(--spacing-lg);
+    color: var(--color-text-light);
+    line-height: var(--leading-relaxed);
 }
 
 /* Grid System */
@@ -123,13 +181,14 @@ header {
 }
 
 .logo {
-    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
     font-weight: 700;
-    color: #333;
+    color: var(--color-secondary);
 }
 
 .logo span {
-    color: #ffc107;
+    color: var(--color-primary);
 }
 
 .nav-menu {
@@ -137,8 +196,10 @@ header {
 }
 
 .nav-item {
-    margin-left: 30px;
+    font-family: var(--font-heading);
     font-weight: 500;
+    font-size: var(--text-sm);
+    margin-left: 30px;
 }
 
 .nav-item a {
@@ -150,7 +211,7 @@ header {
     position: absolute;
     width: 0;
     height: 2px;
-    background: #ffc107;
+    background: var(--color-primary);
     left: 0;
     bottom: -5px;
     transition: width 0.3s;
@@ -214,16 +275,17 @@ header {
 }
 
 .service-card {
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    padding: 30px;
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
     transition: all 0.3s ease;
     height: 100%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .service-icon {
@@ -254,9 +316,9 @@ header {
 }
 
 .benefit-card {
-    background-color: #fff;
-    border-radius: 8px;
-    padding: 30px;
+    background-color: var(--color-white);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
     height: 100%;
@@ -290,7 +352,7 @@ header {
 }
 
 .case-study-card {
-    border-radius: 8px;
+    border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
@@ -414,7 +476,7 @@ header {
 
 /* Footer Styles */
 footer {
-    background: var(--color-dark);
+    background: var(--color-secondary);
     color: var(--color-white);
     padding: var(--spacing-xl) 0;
 }
@@ -430,7 +492,8 @@ footer {
 }
 
 .footer-logo {
-    font-size: 1.8rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-xl);
     font-weight: 700;
     margin-bottom: var(--spacing-sm);
 }
@@ -461,7 +524,8 @@ footer {
 }
 
 .footer-title {
-    font-size: 1.2rem;
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
     margin-bottom: var(--spacing-md);
     color: var(--color-white);
 }
