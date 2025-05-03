@@ -553,13 +553,14 @@ class SearchManager {
         });
         
         this.searchForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent form submission
             console.log('Search form submitted');
-            this.handleSearch(e);
+            this.handleSearch();
         });
         
         this.searchInput.addEventListener('input', (e) => {
             console.log('Search input changed');
-            this.handleSearch(e);
+            this.handleSearch();
         });
         
         // Close search on escape key
@@ -586,8 +587,7 @@ class SearchManager {
         document.body.style.overflow = '';
     }
 
-    async handleSearch(e) {
-        e.preventDefault();
+    handleSearch() {
         const query = this.searchInput.value.trim();
         
         if (!query) {
@@ -596,7 +596,7 @@ class SearchManager {
         }
         
         try {
-            const results = await this.searchContent(query);
+            const results = this.searchContent(query);
             this.displayResults(results);
         } catch (error) {
             console.error('Search failed:', error);
@@ -604,7 +604,7 @@ class SearchManager {
         }
     }
 
-    async searchContent(query) {
+    searchContent(query) {
         const searchTerms = query.toLowerCase().split(' ');
         const results = [];
 
@@ -629,9 +629,7 @@ class SearchManager {
         results.sort((a, b) => b.relevance - a.relevance);
 
         // Group results by section
-        const groupedResults = this.groupResultsBySection(results);
-
-        return groupedResults;
+        return this.groupResultsBySection(results);
     }
 
     calculateRelevance(text, searchTerms) {
